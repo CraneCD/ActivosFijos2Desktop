@@ -50,4 +50,5 @@ _tmp_*
 build/
 dist/
 *.spec
+!ActivosFijos2_desktop.spec
 
