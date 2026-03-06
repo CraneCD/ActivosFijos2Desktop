@@ -1,0 +1,6 @@
+streamlit
+reportlab
+pillow
+svglib
+requests
+yt-dlp

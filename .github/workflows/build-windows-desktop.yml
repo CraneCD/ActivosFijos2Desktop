@@ -1,0 +1,35 @@
+# Build Windows .exe for Activos Fijos Etiquetas 2.0.
+# Push to GitHub, then open Actions → "Build Windows desktop" → run → download artifact.
+
+name: Build Windows desktop
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:  # Lets you run it manually from the Actions tab
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build Windows executable
+        run: pyinstaller --noconfirm ActivosFijos2_desktop.spec
+
+      - name: Upload Windows executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: ActivosFijos2-Windows
+          path: dist/ActivosFijos2.exe
